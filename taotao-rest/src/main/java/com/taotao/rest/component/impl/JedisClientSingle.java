@@ -77,4 +77,12 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
+	@Override
+	public Long hdel(String key, String item) {
+		Jedis jedis = jedisPool.getResource();
+		Long result = jedis.hdel(key, item);
+		jedis.close();
+		return result;		
+	}
+
 }

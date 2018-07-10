@@ -10,4 +10,5 @@ public interface JedisClient {
 	public Long decr(String key);
 	public Long expire(String key, int second);
 	public Long ttl(String key);
+	public Long hdel(String key, String item);
 }

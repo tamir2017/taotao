@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbContentMapper;
 import com.taotao.pojo.TbContent;
@@ -24,7 +26,7 @@ public class ContentServiceImpl implements ContentService {
 	private JedisClient jedisClient;
 	@Value("${REDIS_CONTENT_KEY}")
 	private String REDIS_CONTENT_KEY;
-	
+
 	@Override
 	public List<TbContent> getContentList(Long cid) {
 		// 添加缓存
@@ -60,5 +62,13 @@ public class ContentServiceImpl implements ContentService {
 
 		return list;
 	}
+
+	@Override
+	public TaotaoResult syncContent(Long cid) {
+		jedisClient.hdel(REDIS_CONTENT_KEY, cid + "");
+		return TaotaoResult.ok();
+	}
+
+	
 
 }
