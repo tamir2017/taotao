@@ -59,10 +59,11 @@ public class FreeMarkerTest {
 		configuration.setDefaultEncoding("utf-8");
 		// 第六步：从config对象中获得模板对象。需要制定一个模板文件的名字。
 		Template template = configuration.getTemplate("second.ftl");
+		
 		// 第七步：创建模板需要的数据集。可以是一个map对象也可以是一个pojo，把模板需要的数据都放入数据集。
 		Map root = new HashMap<>();
 		root.put("title", "hello freemarker");
-		root.put("student", new Student(1,"zhangsan","北京"));
+		root.put("student", new Student(1,"张三","北京"));
 		// 第八步：创建一个Writer对象，指定生成的文件保存的路径及文件名。
 		Writer out = new FileWriter(new File("G:\\temp\\html\\second.html"));
 		// 第九步：调用模板对象的process方法生成静态文件。需要两个参数数据集和writer对象。
